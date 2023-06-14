@@ -10,14 +10,15 @@ bot = telebot.TeleBot(BOT_TOKEN)
 
 @bot.message_handler(commands=['start', 'hello'])
 def send_welcome(message):
-    greeting = "Hello! This is Weather Bot. To get started, simply type in "\
-                "your location or share your current location with the bot."
+    greeting = "Hello! This is Weather Bot. To get current weather in your "\
+               "place, please use /weather command."
     bot.reply_to(message, greeting)
 
 
 @bot.message_handler(commands=['weather'])
 def weather_handler(message):
-    text = "What's your location?"
+    text = "What's your location? (type in your city "\
+           "or share your current location with the bot.)"
     sent_msg = bot.send_message(message.chat.id, text)
     bot.register_next_step_handler(sent_msg, location_handler)
 
@@ -38,6 +39,14 @@ def location_handler(message):
 
         bot.send_message(message.chat.id, error_message)
         print(f"Error fetching weather data: {e}")
+
+
+@bot.message_handler()
+def default_handler(message):
+    error_message = "Sorry, I'm currently unable to process this command. "\
+                    "Please try again later."
+
+    bot.reply_to(message, error_message)
 
 
 bot.infinity_polling()
