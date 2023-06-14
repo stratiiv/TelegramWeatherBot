@@ -22,11 +22,22 @@ def weather_handler(message):
     bot.register_next_step_handler(sent_msg, location_handler)
 
 
+@bot.message_handler(content_types=['location'])
 def location_handler(message):
-    location = message.text
-    temp, description = get_current_weather(location)
-    text = f"Currently it is {temp}°C, {description} in {location}"
-    bot.send_message(message.chat.id, text)
+    if message.location:
+        location = (message.location.latitude, message.location.longitude)
+    else:
+        location = message.text
+    try:
+        temp, description = get_current_weather(location)
+        text = f"Currently it is {temp}°C, {description} in {location}"
+        bot.send_message(message.chat.id, text)
+    except Exception as e:
+        error_message = "Sorry, an error occurred while fetching the weather data. "\
+                        "Please make sure you have entered the correct location."
+
+        bot.send_message(message.chat.id, error_message)
+        print(f"Error fetching weather data: {e}")
 
 
 bot.infinity_polling()

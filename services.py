@@ -28,13 +28,10 @@ def get_current_weather(location: str | Tuple[float, float]) -> Tuple[str]:
         params = {
             "lat": location[0],
             "lon": location[1],
-            "appid": API_KEY, 
+            "appid": API_KEY,
             "units": "metric"
         }
 
     r = requests.get(API_URL, params=params)
     data = r.json()
     return data['main']['temp'], data['weather'][0]['description']
-
-
-get_current_weather("ABAHGAH")
