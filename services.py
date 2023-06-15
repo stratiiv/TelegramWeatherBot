@@ -1,8 +1,9 @@
+import os
 from typing import Tuple
 import requests
 
 
-API_KEY = "7598a17dae98564b0adfa271f40a66e7"
+API_KEY = os.environ.get('API_KEY')
 API_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 
