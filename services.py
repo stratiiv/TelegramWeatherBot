@@ -33,5 +33,6 @@ def get_current_weather(location: str | Tuple[float, float]) -> Tuple[str]:
         }
 
     r = requests.get(API_URL, params=params)
+    r.raise_for_status()
     data = r.json()
     return data['main']['temp'], data['weather'][0]['description']

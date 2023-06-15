@@ -42,9 +42,8 @@ def location_handler(message):
             temp, description = get_current_weather(city)
             reply = get_message('weather_in_city').format(temp, description,
                                                           city)
-
     except Exception as e:
-        error_message = get_message(get_message('weather_fail'))
+        error_message = get_message('weather_fail')
         bot.send_message(message.chat.id, error_message)
         print(f"Error fetching weather data: {e}")
     else:
