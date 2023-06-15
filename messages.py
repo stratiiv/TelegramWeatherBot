@@ -1,9 +1,10 @@
 MESSAGES = {
     'weather_hint': "What's your location? (type in your city "
-                    "or share your current location with the bot.)",
+                    "or share your current location with the bot)",
 
     'weather_fail': "Sorry, an error occurred while fetching the weather data."
-                    " Please make sure you have entered the correct location.",
+                    " Please make sure you have entered the correct location "
+                    "or try again later.",
 
     'general_fail': "Sorry, I'm currently unable to process this command. "
                     "Please try again later.",
